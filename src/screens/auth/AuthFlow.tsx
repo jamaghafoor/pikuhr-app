@@ -12,13 +12,7 @@ import {
 type MobileScreen = 'signIn' | 'signUp';
 type Screen = MobileScreen | 'otp' | 'details';
 
-export function AuthFlow({
-  onComplete,
-  onReady,
-}: {
-  onComplete: () => void;
-  onReady: () => void;
-}) {
+export function AuthFlow({ onComplete }: { onComplete: () => void }) {
   const [screen, setScreen] = useState<Screen>('signIn');
   const [direction, setDirection] = useState<1 | -1>(1);
   const [origin, setOrigin] = useState<MobileScreen>('signIn');
@@ -94,7 +88,6 @@ export function AuthFlow({
         onChange={setDetails}
         onBack={goBack}
         onComplete={onComplete}
-        onReady={onReady}
       />
     );
   } else if (screen === 'otp') {
@@ -109,7 +102,6 @@ export function AuthFlow({
         }}
         onVerify={verify}
         onBack={goBack}
-        onReady={onReady}
       />
     );
   } else {
@@ -129,7 +121,6 @@ export function AuthFlow({
             screen === 'signIn' ? 1 : -1,
           )
         }
-        onReady={onReady}
       />
     );
   }

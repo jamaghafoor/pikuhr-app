@@ -27,7 +27,6 @@ async function setup(initial?: Partial<ShopkeeperDetails>) {
         onChange={setValues}
         onComplete={complete}
         onBack={jest.fn()}
-        onReady={jest.fn()}
       />
     );
   }

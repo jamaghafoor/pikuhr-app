@@ -1,4 +1,4 @@
-Pikuhr is a React Native app with an Android launch image, a three-page onboarding flow, and demo mobile authentication built from the supplied designs.
+Pikuhr is a React Native app with a three-page onboarding flow and demo mobile authentication built from the supplied designs.
 
 The illustrations and copy slide together on one screen using a native-driven animation. Next advances a page; Skip (pages 1–2) and Start Now (page 3) open Sign In. Horizontal swipes are also supported. The screen respects reduced motion, safe areas, and larger text.
 
@@ -8,7 +8,7 @@ Shopkeeper Details requires Shopkeeper Name, Shop Name, State, and City before N
 
 Screen changes use a short, native-driven horizontal slide, reversed for back navigation. The transition keeps the outgoing screen visible until the new screen is in place and switches immediately when the device's reduced-motion setting is enabled.
 
-Android displays the supplied `500.png` as one full-screen native image (`startup_screen.png`) while JavaScript loads, then fades into onboarding or Sign In once that screen is ready. The image uses center-crop scaling to fill the display without distortion or empty borders. On Android 12+, the launch theme disables the system starting-window preview with `android:windowDisablePreview`, so there is no separate circular-logo screen. The previous screen remains visible while Android creates the activity. Android remembers onboarding completion in app preferences. The shared onboarding and authentication UI and Poppins fonts are also configured for iOS; its native splash and persisted completion are outside the current Android setup.
+The app opens directly to onboarding or Sign In, with no custom splash image, logo overlay, loading delay, or splash fade. Android disables its starting-window preview and remembers onboarding completion in app preferences. The shared UI and Poppins fonts are also configured for iOS, whose launch storyboard is a plain background; persisted onboarding completion remains Android-only.
 
 To preview onboarding again in an Android **debug** installation, stop the app and remove only its onboarding preference:
 
@@ -29,9 +29,9 @@ cd android
 ./gradlew :app:assembleRelease
 ```
 
-The output is `android/app/build/outputs/apk/release/app-release.apk` (relative to the project root). The current build is **22,362,791 bytes (22.36 MB)**, reduced from **57,414,609 bytes (57.41 MB)**. Both include `armeabi-v7a`, `arm64-v8a`, `x86`, and `x86_64`; no processor support was removed.
+The output is `android/app/build/outputs/apk/release/app-release.apk` (relative to the project root). The current build is **22,097,339 bytes (22.10 MB)**, reduced from **57,414,609 bytes (57.41 MB)**. Both include `armeabi-v7a`, `arm64-v8a`, `x86`, and `x86_64`; no processor support was removed.
 
-Release builds enable R8 code optimization and resource shrinking. Native `.so` libraries are compressed in the APK, and three unused splash drawables were removed. The active images and fonts retain their original quality. Android extracts the device's native libraries during installation, so the APK download size is smaller but installed storage is not reduced by the same amount. The measured size will change as features and dependencies are added. R8's mapping file is generated at `android/app/build/outputs/mapping/release/mapping.txt`; retain the matching file when archiving a release for crash deobfuscation.
+Release builds enable R8 code optimization and resource shrinking. Native `.so` libraries are compressed in the APK, and unused full-screen splash resources were removed. The active images and fonts retain their original quality. Android extracts the device's native libraries during installation, so the APK download size is smaller but installed storage is not reduced by the same amount. The measured size will change as features and dependencies are added. R8's mapping file is generated at `android/app/build/outputs/mapping/release/mapping.txt`; retain the matching file when archiving a release for crash deobfuscation.
 
 For Google Play distribution, use `./gradlew :app:bundleRelease` to generate an App Bundle so Play can deliver only the libraries and resources needed by each device. The current demo build still uses the project's debug signing key.
 

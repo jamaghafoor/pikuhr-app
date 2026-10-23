@@ -17,7 +17,6 @@ export function AuthLayout({
   title,
   description,
   onBack,
-  onReady,
   children,
   footer,
   compact = false,
@@ -25,7 +24,6 @@ export function AuthLayout({
   title: string;
   description?: string;
   onBack?: () => void;
-  onReady: () => void;
   children: ReactNode;
   footer?: ReactNode;
   compact?: boolean;
@@ -43,7 +41,6 @@ export function AuthLayout({
         bounces={false}
         showsVerticalScrollIndicator={false}
         contentContainerStyle={styles.scroll}
-        onLayout={onReady}
       >
         <View
           style={[

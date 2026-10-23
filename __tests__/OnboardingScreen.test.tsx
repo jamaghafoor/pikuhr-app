@@ -1,5 +1,5 @@
 import React from 'react';
-import { AccessibilityInfo, Image } from 'react-native';
+import { AccessibilityInfo } from 'react-native';
 import TestRenderer, { act } from 'react-test-renderer';
 import { OnboardingScreen } from '../src/screens/OnboardingScreen';
 
@@ -22,12 +22,9 @@ afterEach(() => {
 
 async function renderScreen() {
   const onFinish = jest.fn();
-  const onReady = jest.fn();
   let renderer!: TestRenderer.ReactTestRenderer;
   await act(async () => {
-    renderer = TestRenderer.create(
-      <OnboardingScreen onFinish={onFinish} onReady={onReady} />,
-    );
+    renderer = TestRenderer.create(<OnboardingScreen onFinish={onFinish} />);
   });
   const button = (label: string) =>
     renderer.root.findAll(
@@ -35,7 +32,7 @@ async function renderScreen() {
         node.props.accessibilityLabel === label &&
         typeof node.props.onPress === 'function',
     )[0];
-  return { renderer, onFinish, onReady, button };
+  return { renderer, onFinish, button };
 }
 
 test('Next advances once per transition, and Start Now finishes', async () => {
@@ -83,21 +80,5 @@ test('Skip finishes immediately from either of the first two pages', async () =>
     button('Skip onboarding').props.onPress();
   });
   expect(onFinish).toHaveBeenCalledTimes(2);
-  act(() => renderer.unmount());
-});
-
-test('keeps the native splash until layout and the first illustration are ready', async () => {
-  const { renderer, onReady } = await renderScreen();
-  act(() => {
-    renderer.root.findAllByType(Image)[0].props.onLoad();
-  });
-  expect(onReady).not.toHaveBeenCalled();
-  const pager = renderer.root
-    .findAll(node => typeof node.props.onLayout === 'function')
-    .find(node => node.props.onMoveShouldSetResponder)!;
-  act(() => {
-    pager.props.onLayout();
-  });
-  expect(onReady).toHaveBeenCalledTimes(1);
   act(() => renderer.unmount());
 });

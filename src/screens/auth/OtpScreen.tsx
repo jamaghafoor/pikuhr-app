@@ -15,7 +15,6 @@ export function OtpScreen({
   onChangeCode,
   onVerify,
   onBack,
-  onReady,
 }: {
   mobile: string;
   code: string;
@@ -23,14 +22,12 @@ export function OtpScreen({
   onChangeCode: (value: string) => void;
   onVerify: () => void;
   onBack: () => void;
-  onReady: () => void;
 }) {
   const suffix = mobile.replace(/\D/g, '').slice(-3) || mobile.slice(-3);
   return (
     <AuthLayout
       title="OTP"
       onBack={onBack}
-      onReady={onReady}
       description={`Please enter the 6-digit OTP sent to your mobile number XXX-${suffix}.`}
     >
       <AuthField

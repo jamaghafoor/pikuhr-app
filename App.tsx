@@ -10,7 +10,6 @@ import { ScreenTransition } from './src/components/ScreenTransition';
 const launch = NativeModules.PikuhrLaunch as
   | {
       hasCompletedOnboarding: boolean;
-      hide: () => void;
       completeOnboarding: () => void;
     }
   | undefined;
@@ -23,7 +22,6 @@ export default function App() {
     launch?.completeOnboarding();
     setScreen('auth');
   }, []);
-  const onReady = useCallback(() => launch?.hide(), []);
 
   return (
     <SafeAreaProvider>
@@ -33,11 +31,11 @@ export default function App() {
       <View style={styles.root}>
         <ScreenTransition screenKey={screen}>
           {screen === 'home' ? (
-            <HomeScreen onReady={onReady} />
+            <HomeScreen />
           ) : screen === 'auth' ? (
-            <AuthFlow onComplete={() => setScreen('home')} onReady={onReady} />
+            <AuthFlow onComplete={() => setScreen('home')} />
           ) : (
-            <OnboardingScreen onFinish={finishOnboarding} onReady={onReady} />
+            <OnboardingScreen onFinish={finishOnboarding} />
           )}
         </ScreenTransition>
       </View>

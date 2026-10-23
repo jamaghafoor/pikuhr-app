@@ -15,13 +15,11 @@ export function SignUpScreen({
   onChangeMobile,
   onSend,
   onSwitch,
-  onReady,
 }: MobileFormProps) {
   return (
     <AuthLayout
       title="Sign Up"
       onBack={onSwitch}
-      onReady={onReady}
       description="Please enter your mobile number for registration. We will send an OTP to that number for verification."
       footer={
         <Text style={authTextStyles.footer}>

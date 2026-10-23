@@ -14,7 +14,6 @@ export type MobileFormProps = {
   onChangeMobile: (value: string) => void;
   onSend: () => void;
   onSwitch: () => void;
-  onReady: () => void;
 };
 
 export function SignInScreen({
@@ -23,12 +22,10 @@ export function SignInScreen({
   onChangeMobile,
   onSend,
   onSwitch,
-  onReady,
 }: MobileFormProps) {
   return (
     <AuthLayout
       title="Sign In"
-      onReady={onReady}
       description="Please enter your registered mobile number, and we will send an OTP to your phone."
       footer={
         <Text style={authTextStyles.footer}>

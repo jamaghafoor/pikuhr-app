@@ -19,9 +19,7 @@ async function setup() {
   const complete = jest.fn();
   let renderer!: TestRenderer.ReactTestRenderer;
   await act(async () => {
-    renderer = TestRenderer.create(
-      <AuthFlow onComplete={complete} onReady={jest.fn()} />,
-    );
+    renderer = TestRenderer.create(<AuthFlow onComplete={complete} />);
   });
   const action = (label: string) =>
     renderer.root.findAll(

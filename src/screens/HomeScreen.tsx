@@ -2,9 +2,9 @@ import React from 'react';
 import { StyleSheet, Text } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
-export function HomeScreen({ onReady }: { onReady: () => void }) {
+export function HomeScreen() {
   return (
-    <SafeAreaView style={styles.screen} onLayout={onReady}>
+    <SafeAreaView style={styles.screen}>
       <Text accessibilityRole="header" style={styles.title}>
         Home
       </Text>

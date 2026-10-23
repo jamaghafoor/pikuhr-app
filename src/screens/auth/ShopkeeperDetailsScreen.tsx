@@ -27,13 +27,11 @@ export function ShopkeeperDetailsScreen({
   onChange,
   onBack,
   onComplete,
-  onReady,
 }: {
   values: ShopkeeperDetails;
   onChange: (values: ShopkeeperDetails) => void;
   onBack: () => void;
   onComplete: () => void;
-  onReady: () => void;
 }) {
   const { width } = useWindowDimensions();
   const scale = Math.min(width / 375, 1.2);
@@ -81,12 +79,7 @@ export function ShopkeeperDetailsScreen({
 
   return (
     <>
-      <AuthLayout
-        title="Shopkeeper Details"
-        compact
-        onBack={onBack}
-        onReady={onReady}
-      >
+      <AuthLayout title="Shopkeeper Details" compact onBack={onBack}>
         <View style={{ gap: 14 * scale }}>
           <AuthField
             label="Shopkeeper Name"
