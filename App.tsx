@@ -1,45 +1,50 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- */
+import React, { useCallback, useState } from 'react';
+import { NativeModules, StatusBar, StyleSheet, View } from 'react-native';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { HomeScreen } from './src/screens/HomeScreen';
+import { OnboardingScreen } from './src/screens/OnboardingScreen';
+import { AuthFlow } from './src/screens/auth/AuthFlow';
+import { ScreenTransition } from './src/components/ScreenTransition';
 
-import { NewAppScreen } from '@react-native/new-app-screen';
-import { StatusBar, StyleSheet, useColorScheme, View } from 'react-native';
-import {
-  SafeAreaProvider,
-  useSafeAreaInsets,
-} from 'react-native-safe-area-context';
+// Android reads completion before the first JS render, avoiding an onboarding flash.
+const launch = NativeModules.PikuhrLaunch as
+  | {
+      hasCompletedOnboarding: boolean;
+      hide: () => void;
+      completeOnboarding: () => void;
+    }
+  | undefined;
 
-function App() {
-  const isDarkMode = useColorScheme() === 'dark';
+export default function App() {
+  const [screen, setScreen] = useState<'onboarding' | 'auth' | 'home'>(
+    launch?.hasCompletedOnboarding ? 'auth' : 'onboarding',
+  );
+  const finishOnboarding = useCallback(() => {
+    launch?.completeOnboarding();
+    setScreen('auth');
+  }, []);
+  const onReady = useCallback(() => launch?.hide(), []);
 
   return (
     <SafeAreaProvider>
-      <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
-      <AppContent />
+      <StatusBar
+        barStyle={screen === 'auth' ? 'light-content' : 'dark-content'}
+      />
+      <View style={styles.root}>
+        <ScreenTransition screenKey={screen}>
+          {screen === 'home' ? (
+            <HomeScreen onReady={onReady} />
+          ) : screen === 'auth' ? (
+            <AuthFlow onComplete={() => setScreen('home')} onReady={onReady} />
+          ) : (
+            <OnboardingScreen onFinish={finishOnboarding} onReady={onReady} />
+          )}
+        </ScreenTransition>
+      </View>
     </SafeAreaProvider>
   );
 }
 
-function AppContent() {
-  const safeAreaInsets = useSafeAreaInsets();
-
-  return (
-    <View style={styles.container}>
-      <NewAppScreen
-        templateFileName="App.tsx"
-        safeAreaInsets={safeAreaInsets}
-      />
-    </View>
-  );
-}
-
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
+  root: { flex: 1, backgroundColor: '#FEFDFD' },
 });
-
-export default App;

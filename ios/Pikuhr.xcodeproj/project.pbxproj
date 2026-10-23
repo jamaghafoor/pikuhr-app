@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A00100000000000000000004 /* Poppins OFL.txt in Resources */ = {isa = PBXBuildFile; fileRef = A00100000000000000000014 /* Poppins OFL.txt */; };
+		A00100000000000000000001 /* Poppins-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A00100000000000000000011 /* Poppins-Regular.ttf */; };
+		A00100000000000000000002 /* Poppins-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A00100000000000000000012 /* Poppins-Medium.ttf */; };
+		A00100000000000000000003 /* Poppins-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A00100000000000000000013 /* Poppins-SemiBold.ttf */; };
 		0C80B921A6F3F58F76C31292 /* libPods-Pikuhr.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DCACB8F33CDC322A6C60F78 /* libPods-Pikuhr.a */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		761780ED2CA45674006654EE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 761780EC2CA45674006654EE /* AppDelegate.swift */; };
@@ -15,6 +19,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		A00100000000000000000014 /* Poppins OFL.txt */ = {isa = PBXFileReference; lastKnownFileType = text; name = "Poppins OFL.txt"; path = "../assets/fonts/OFL.txt"; sourceTree = SOURCE_ROOT; };
+		A00100000000000000000011 /* Poppins-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "../assets/fonts/Poppins-Regular.ttf"; sourceTree = SOURCE_ROOT; };
+		A00100000000000000000012 /* Poppins-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "../assets/fonts/Poppins-Medium.ttf"; sourceTree = SOURCE_ROOT; };
+		A00100000000000000000013 /* Poppins-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "../assets/fonts/Poppins-SemiBold.ttf"; sourceTree = SOURCE_ROOT; };
 		13B07F961A680F5B00A75B9A /* Pikuhr.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Pikuhr.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = Pikuhr/Images.xcassets; sourceTree = "<group>"; };
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = Pikuhr/Info.plist; sourceTree = "<group>"; };
@@ -43,6 +51,10 @@
 		13B07FAE1A68108700A75B9A /* Pikuhr */ = {
 			isa = PBXGroup;
 			children = (
+				A00100000000000000000014 /* Poppins OFL.txt */,
+				A00100000000000000000011 /* Poppins-Regular.ttf */,
+				A00100000000000000000012 /* Poppins-Medium.ttf */,
+				A00100000000000000000013 /* Poppins-SemiBold.ttf */,
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
 				761780EC2CA45674006654EE /* AppDelegate.swift */,
 				761780EE2CA45674006654EF /* SceneDelegate.swift */,
@@ -160,6 +172,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A00100000000000000000004 /* Poppins OFL.txt in Resources */,
+				A00100000000000000000001 /* Poppins-Regular.ttf in Resources */,
+				A00100000000000000000002 /* Poppins-Medium.ttf in Resources */,
+				A00100000000000000000003 /* Poppins-SemiBold.ttf in Resources */,
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 			);
