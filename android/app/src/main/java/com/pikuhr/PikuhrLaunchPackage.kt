@@ -29,4 +29,11 @@ class PikuhrLaunchModule(context: ReactApplicationContext) :
   fun completeOnboarding() {
     preferences.edit().putBoolean("onboarding_complete", true).apply()
   }
+
+  @ReactMethod
+  fun hide() {
+    reactApplicationContext.currentActivity?.runOnUiThread {
+      (reactApplicationContext.currentActivity as? MainActivity)?.hideLaunchScreen()
+    }
+  }
 }

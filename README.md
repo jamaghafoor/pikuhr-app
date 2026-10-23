@@ -6,9 +6,11 @@ Sign In and Sign Up accept any nonempty mobile number for the demo. Send OTP ope
 
 Shopkeeper Details requires Shopkeeper Name, Shop Name, State, and City before Next opens Home. State appears before City; the city list depends on the selected state, and changing state clears the previous city. The demo includes Maharashtra, Karnataka, Gujarat, Rajasthan, Tamil Nadu, and Uttar Pradesh, with four cities each. Going back to OTP and verifying again preserves the draft details. Profiles are kept only for the current demo session.
 
+Sign In, Sign Up, OTP, and Shopkeeper Details share a keyboard-aware scrolling layout. Opening the keyboard reduces the available form viewport, so the action button and remaining fields can be scrolled into view. Scrolling keeps the keyboard open, and visible buttons respond to the first tap. Forms without a footer include bottom padding above the safe area.
+
 Screen changes use a short, native-driven horizontal slide, reversed for back navigation. The transition keeps the outgoing screen visible until the new screen is in place and switches immediately when the device's reduced-motion setting is enabled.
 
-The app opens directly to onboarding or Sign In, with no custom splash image, logo overlay, loading delay, or splash fade. Android disables its starting-window preview and remembers onboarding completion in app preferences. The shared UI and Poppins fonts are also configured for iOS, whose launch storyboard is a plain background; persisted onboarding completion remains Android-only.
+Android displays the supplied full-screen startup artwork from `android/app/src/main/res/drawable-nodpi/startup_screen.png` while the app loads. Center-crop scaling fills the display without stretching the image or adding borders. The image remains visible for at least 900ms and until the initial screen is ready, then fades into onboarding or Sign In over 220ms (immediately with reduced motion). Android first displays its app-logo screen on a white background, followed by the full-screen startup artwork and then onboarding or Sign In. Android remembers onboarding completion in app preferences. The shared UI and Poppins fonts are also configured for iOS, whose launch storyboard remains a plain background; this startup artwork and persisted onboarding completion are Android-only.
 
 To preview onboarding again in an Android **debug** installation, stop the app and remove only its onboarding preference:
 
@@ -29,9 +31,9 @@ cd android
 ./gradlew :app:assembleRelease
 ```
 
-The output is `android/app/build/outputs/apk/release/app-release.apk` (relative to the project root). The current build is **22,097,339 bytes (22.10 MB)**, reduced from **57,414,609 bytes (57.41 MB)**. Both include `armeabi-v7a`, `arm64-v8a`, `x86`, and `x86_64`; no processor support was removed.
+The output is `android/app/build/outputs/apk/release/app-release.apk` (relative to the project root). The current build is **22,362,959 bytes (22.36 MB)**, reduced from **57,414,609 bytes (57.41 MB)**. Both include `armeabi-v7a`, `arm64-v8a`, `x86`, and `x86_64`; no processor support was removed.
 
-Release builds enable R8 code optimization and resource shrinking. Native `.so` libraries are compressed in the APK, and unused full-screen splash resources were removed. The active images and fonts retain their original quality. Android extracts the device's native libraries during installation, so the APK download size is smaller but installed storage is not reduced by the same amount. The measured size will change as features and dependencies are added. R8's mapping file is generated at `android/app/build/outputs/mapping/release/mapping.txt`; retain the matching file when archiving a release for crash deobfuscation.
+Release builds enable R8 code optimization and resource shrinking. Native `.so` libraries are compressed in the APK, and unused splash resources were removed. The active images and fonts retain their original quality. Android extracts the device's native libraries during installation, so the APK download size is smaller but installed storage is not reduced by the same amount. The measured size will change as features and dependencies are added. R8's mapping file is generated at `android/app/build/outputs/mapping/release/mapping.txt`; retain the matching file when archiving a release for crash deobfuscation.
 
 For Google Play distribution, use `./gradlew :app:bundleRelease` to generate an App Bundle so Play can deliver only the libraries and resources needed by each device. The current demo build still uses the project's debug signing key.
 

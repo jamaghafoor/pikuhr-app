@@ -50,9 +50,9 @@ const pages = [
   },
 ];
 
-type Props = { onFinish: () => void };
+type Props = { onFinish: () => void; onReady: () => void };
 
-export function OnboardingScreen({ onFinish }: Props) {
+export function OnboardingScreen({ onFinish, onReady }: Props) {
   const { width, height, fontScale } = useWindowDimensions();
   const insets = useSafeAreaInsets();
   const scale = Math.min(width / 375, 1.2);
@@ -66,6 +66,8 @@ export function OnboardingScreen({ onFinish }: Props) {
   const currentPage = useRef(0);
   const transitioning = useRef(false);
   const reduceMotion = useRef(false);
+  const [imageReady, setImageReady] = useState(false);
+  const [layoutReady, setLayoutReady] = useState(false);
   const [viewportHeight, setViewportHeight] = useState(0);
 
   useEffect(() => {
@@ -85,6 +87,12 @@ export function OnboardingScreen({ onFinish }: Props) {
       progress.stopAnimation();
     };
   }, [progress]);
+
+  useEffect(() => {
+    if (imageReady && layoutReady) {
+      onReady();
+    }
+  }, [imageReady, layoutReady, onReady]);
 
   const goToPage = useCallback(
     (next: number) => {
@@ -148,6 +156,7 @@ export function OnboardingScreen({ onFinish }: Props) {
       >
         <View
           style={[styles.pager, { minHeight: contentHeight - 160 * scale }]}
+          onLayout={() => setLayoutReady(true)}
           {...panResponder.panHandlers}
         >
           <Animated.View
@@ -178,6 +187,7 @@ export function OnboardingScreen({ onFinish }: Props) {
                     resizeMode="contain"
                     accessible={false}
                     fadeDuration={0}
+                    onLoad={index === 0 ? () => setImageReady(true) : undefined}
                   />
                 </View>
                 <View style={[styles.copy, { paddingHorizontal: 27 * scale }]}>

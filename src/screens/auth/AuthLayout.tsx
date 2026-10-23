@@ -31,16 +31,22 @@ export function AuthLayout({
   const insets = useSafeAreaInsets();
   const { width } = useWindowDimensions();
   const scale = Math.min(width / 375, 1.2);
+  const bottomSpacing = footer ? 0 : insets.bottom + 24 * scale;
   return (
     <KeyboardAvoidingView
       style={styles.screen}
-      behavior={Platform.OS === 'ios' ? 'padding' : undefined}
+      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
     >
       <ScrollView
+        style={styles.scrollViewport}
         keyboardShouldPersistTaps="handled"
+        keyboardDismissMode="none"
         bounces={false}
         showsVerticalScrollIndicator={false}
-        contentContainerStyle={styles.scroll}
+        contentContainerStyle={[
+          styles.scroll,
+          { paddingBottom: bottomSpacing },
+        ]}
       >
         <View
           style={[
@@ -393,6 +399,7 @@ export const authTextStyles = StyleSheet.create({
 
 const styles = StyleSheet.create({
   screen: { flex: 1, backgroundColor: '#FEFDFD' },
+  scrollViewport: { flex: 1 },
   scroll: { flexGrow: 1 },
   header: {
     overflow: 'hidden',

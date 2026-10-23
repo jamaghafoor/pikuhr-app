@@ -1,0 +1,13 @@
+<resources>
+    <!-- Android's initial logo screen precedes our full-screen startup artwork. -->
+    <style name="LaunchTheme" parent="AppTheme">
+        <item name="android:windowDisablePreview">false</item>
+        <item name="android:windowBackground">@drawable/launch_background</item>
+        <item name="android:windowSplashScreenBackground">@android:color/white</item>
+        <item name="android:windowSplashScreenAnimatedIcon">@mipmap/ic_launcher</item>
+        <item name="android:windowSplashScreenIconBackgroundColor">@android:color/white</item>
+        <item name="android:windowLightStatusBar">true</item>
+        <item name="android:statusBarColor">@android:color/white</item>
+        <item name="android:navigationBarColor">@android:color/white</item>
+    </style>
+</resources>
