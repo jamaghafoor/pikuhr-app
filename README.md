@@ -1,24 +1,18 @@
-Pikuhr is a React Native app with a three-page onboarding flow and demo mobile authentication built from the supplied designs.
+Pikuhr opens directly from the native splash into the Home dashboard from Figma frame `1401:4`. The dashboard uses the original avatar and icons, locally bundled with 3x PNG versions of the original SVGs. Its sample attendance, salary, and advance values match the design.
 
-The illustrations and copy slide together on one screen using a native-driven animation. Next advances a page; Skip (pages 1–2) and Start Now (page 3) open Sign In. Horizontal swipes are also supported. The screen respects reduced motion, safe areas, and larger text.
+The fixed bottom bar has Home, Salary, Attendance, and Profile tabs. Screen state and scroll positions are retained when switching tabs. Android Back closes a salary subpage before returning to Home. The home avatar opens Profile, and View Details opens Advance Details.
 
-Sign In and Sign Up accept any nonempty mobile number for the demo. Send OTP opens the shared OTP screen and displays the last three digits of the entered number. Any six-digit numeric code verifies successfully and opens Shopkeeper Details; no SMS or authentication API is called. Back and Change Mobile Number return to the originating form while preserving its number. Each new app launch starts at Sign In after onboarding has been completed; demo verification lasts for the current session.
+Salary and Salary Slip follow Figma frames `1401:365` and `1401:598`, with the original locally bundled assets. Month and year selectors update the demo payroll; View Salary Slip preserves that period. Unavailable future periods show an empty state and disable the slip action. Earned salary already includes absence deductions, so net pay subtracts the advance deduction only once.
 
-Shopkeeper Details requires Shopkeeper Name, Shop Name, State, and City before Next opens Home. State appears before City; the city list depends on the selected state, and changing state clears the previous city. The demo includes Maharashtra, Karnataka, Gujarat, Rajasthan, Tamil Nadu, and Uttar Pradesh, with four cities each. Going back to OTP and verifying again preserves the draft details. Profiles are kept only for the current demo session.
+Attendance follows frame `1401:136` with a real Monday-first calendar, leap years, month/year selection, previous/next navigation, selectable dates, and date-specific check-in, check-out, QR source, and location status. The list button switches to daily records with status filters; summaries and PDF exports use the visible records. Returning to the calendar restores the full-month summary and export. October 2026 starts on 7 October with the supplied seven demo records. Earlier months have deterministic demo history; future dates have no records. No live attendance or GPS verification occurs.
 
-Sign In, Sign Up, OTP, and Shopkeeper Details share a keyboard-aware scrolling layout. Opening the keyboard reduces the available form viewport, so the action button and remaining fields can be scrolled into view. Scrolling keeps the keyboard open, and visible buttons respond to the first tap. Forms without a footer include bottom padding above the safe area.
+The supplied employee design page has no Profile frame. Profile reuses the Salary Slip employee card and common styling. Employee ID stays fixed; name, designation, store, mobile, email, and city can be edited with validation. Changes persist in Android SharedPreferences or iOS UserDefaults and update Home and later reports. These are local demo edits, with no backend profile API.
 
-Screen changes use a short, native-driven horizontal slide, reversed for back navigation. The transition keeps the outgoing screen visible until the new screen is in place and switches immediately when the device's reduced-motion setting is enabled.
+Download actions generate actual text/vector PDFs for salary slips, attendance reports, advance statements, and employee details. Android 10+ uses `PdfDocument` and MediaStore to save directly in Downloads/Pikuhr; Android 7-9 use the system Save As picker. iOS uses `UIGraphicsPDFRenderer` and the Files export picker. No storage permission or new dependency is needed. Cancelling does not show a success message, failures remain retryable, and temporary export files are removed. Native module changes require a fresh Android/iOS build rather than a Metro reload; the iOS source is included in the Xcode target.
 
-Android displays the supplied full-screen startup artwork from `android/app/src/main/res/drawable-nodpi/startup_screen.png` while the app loads. Center-crop scaling fills the display without stretching the image or adding borders. The image remains visible for at least 900ms and until the initial screen is ready, then fades into onboarding or Sign In over 220ms (immediately with reduced motion). Android first displays its app-logo screen on a white background, followed by the full-screen startup artwork and then onboarding or Sign In. Android remembers onboarding completion in app preferences. The shared UI and Poppins fonts are also configured for iOS, whose launch storyboard remains a plain background; this startup artwork and persisted onboarding completion are Android-only.
+The earlier onboarding and demo authentication screens remain in the source and retain their tests, but are currently bypassed at launch. No authentication or attendance API is called by the dashboard.
 
-To preview onboarding again in an Android **debug** installation, stop the app and remove only its onboarding preference:
-
-```sh
-adb shell am force-stop com.pikuhr
-adb shell run-as com.pikuhr rm -f shared_prefs/pikuhr.xml
-adb shell am start -n com.pikuhr/.MainActivity
-```
+Android retains its existing native splash artwork and minimum 900ms display, then fades into Home once the main app has laid out. The shared UI and Poppins fonts are configured for both platforms; the existing full-screen splash implementation is Android-only.
 
 Validation commands: `npm test -- --runInBand`, `npm run lint`, and `npx tsc --noEmit`. Use Node 22.11 or newer, as specified in `package.json`.
 

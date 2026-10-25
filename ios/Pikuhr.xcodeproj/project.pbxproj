@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+        B82610000000000000000001 /* PikuhrDevice.mm in Sources */ = {isa = PBXBuildFile; fileRef = B82610000000000000000002 /* PikuhrDevice.mm */; };
 		A00100000000000000000004 /* Poppins OFL.txt in Resources */ = {isa = PBXBuildFile; fileRef = A00100000000000000000014 /* Poppins OFL.txt */; };
 		A00100000000000000000001 /* Poppins-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A00100000000000000000011 /* Poppins-Regular.ttf */; };
 		A00100000000000000000002 /* Poppins-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A00100000000000000000012 /* Poppins-Medium.ttf */; };
@@ -19,6 +20,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+        B82610000000000000000002 /* PikuhrDevice.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; name = PikuhrDevice.mm; path = Pikuhr/PikuhrDevice.mm; sourceTree = "<group>"; };
 		A00100000000000000000014 /* Poppins OFL.txt */ = {isa = PBXFileReference; lastKnownFileType = text; name = "Poppins OFL.txt"; path = "../assets/fonts/OFL.txt"; sourceTree = SOURCE_ROOT; };
 		A00100000000000000000011 /* Poppins-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "../assets/fonts/Poppins-Regular.ttf"; sourceTree = SOURCE_ROOT; };
 		A00100000000000000000012 /* Poppins-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "../assets/fonts/Poppins-Medium.ttf"; sourceTree = SOURCE_ROOT; };
@@ -51,6 +53,7 @@
 		13B07FAE1A68108700A75B9A /* Pikuhr */ = {
 			isa = PBXGroup;
 			children = (
+                B82610000000000000000002 /* PikuhrDevice.mm */,
 				A00100000000000000000014 /* Poppins OFL.txt */,
 				A00100000000000000000011 /* Poppins-Regular.ttf */,
 				A00100000000000000000012 /* Poppins-Medium.ttf */,
@@ -263,6 +266,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+                B82610000000000000000001 /* PikuhrDevice.mm in Sources */,
 				761780ED2CA45674006654EE /* AppDelegate.swift in Sources */,
 				761780EF2CA45674006654EF /* SceneDelegate.swift in Sources */,
 			);
